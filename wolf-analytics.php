@@ -121,7 +121,13 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		 */
 		public function add_menu() {
 
-			add_management_page( esc_html( 'Analytics', '%TEXTDOMAIN%' ), esc_html( 'Analytics', '%TEXTDOMAIN%' ), 'activate_plugins', 'wolf-analytics', array( $this, 'analytics_settings' ) , 'dashicons-chart-line' );
+			add_management_page(
+				esc_html( 'Analytics', '%TEXTDOMAIN%' ),
+				esc_html( 'Analytics', '%TEXTDOMAIN%' ),
+				'activate_plugins',
+				'wolf-analytics',
+				[ $this, 'analytics_settings' ]
+			);
 		}
 
 		/**
