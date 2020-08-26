@@ -1,15 +1,13 @@
 <?php
 /**
- * %NAME% Uninstall
+ * Wolf Analytics Uninstall
  *
- * Uninstalling %NAME%
+ * Uninstalling Wolf Analytics
  *
- * @author %AUTHOR%
+ * @author WolfThemes
  * @category Core
  * @package WolfAnalytics/Uninstaller
- * @version %VERSION%
+ * @version 1.0.5
  */
 
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;

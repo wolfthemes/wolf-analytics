@@ -1,29 +1,27 @@
 <?php
 /**
  * Plugin Name: Wolf Analytics
- * Plugin URI: %LINK%
- * Description: %DESCRIPTION%
- * Version: %VERSION%
- * Author: %AUTHOR%
- * Author URI: %AUTHORURI%
- * Requires at least: %REQUIRES%
- * Tested up to: %TESTED%
+ * Plugin URI: https://github.com/wolfthemes/wolf-analytics
+ * Description: Output your Google Analytics tracking code to your visitor everywhere on your website.
+ * Version: 1.0.5
+ * Author: WolfThemes
+ * Author URI: http://wolfthemes.com
+ * Requires at least: 5.0
+ * Tested up to: 5.5
  *
- * Text Domain: %TEXTDOMAIN%
+ * Text Domain: wolf-analytics
  * Domain Path: /languages/
  *
  * @package WolfAnalytics
  * @category Core
- * @author %AUTHOR%
+ * @author WolfThemes
  *
  * Verified customers who have purchased a premium theme at https://wlfthm.es/tf/
  * will have access to support for this plugin in the forums
  * https://wlfthm.es/help/
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Wolf_Analytics' ) ) {
 	/**
@@ -32,7 +30,7 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 	 * Contains the main functions for Wolf_Analytics
 	 *
 	 * @class Wolf_Analytics
-	 * @version %VERSION%
+	 * @version 1.0.5
 	 * @since 1.0.0
 	 */
 	class Wolf_Analytics {
@@ -40,31 +38,26 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		/**
 		 * @var string
 		 */
-		public $version = '%VERSION%';
+		public $version = '1.0.5';
 
 		/**
-		 * @var %NAME% The single instance of the class
+		 * @var Wolf Analytics The single instance of the class
 		 */
 		protected static $_instance = null;
 
 		/**
-		 * @var string
-		 */
-		private $update_url = 'http://plugins.wolfthemes.com/update';
-
-		/**
 		 * @var the support forum URL
 		 */
-		private $support_url = 'http://help.wolfthemes.com/';
+		private $support_url = 'https://wlfthm.es/help';
 
 		/**
-		 * Main %NAME% Instance
+		 * Main Wolf Analytics Instance
 		 *
-		 * Ensures only one instance of %NAME% is loaded or can be loaded.
+		 * Ensures only one instance of Wolf Analytics is loaded or can be loaded.
 		 *
 		 * @static
-		 * @see WPM()
-		 * @return %NAME% - Main instance
+		 * @see WLFNLTCS()
+		 * @return Wolf Analytics - Main instance
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -74,7 +67,7 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		}
 
 		/**
-		 * %NAME% Constructor.
+		 * Wolf Analytics Constructor.
 		 */
 		public function __construct() {
 
@@ -109,7 +102,7 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		}
 
 		/**
-		 * Init %NAME% when WordPress Initialises.
+		 * Init Wolf Analytics when WordPress Initialises.
 		 */
 		public function init() {
 			// Set up localisation
@@ -122,8 +115,8 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		public function add_menu() {
 
 			add_management_page(
-				esc_html( 'Analytics', '%TEXTDOMAIN%' ),
-				esc_html( 'Analytics', '%TEXTDOMAIN%' ),
+				esc_html( 'Analytics', 'wolf-analytics' ),
+				esc_html( 'Analytics', 'wolf-analytics' ),
 				'activate_plugins',
 				'wolf-analytics',
 				[ $this, 'analytics_settings' ]
@@ -195,17 +188,17 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 			?>
 			<div class="wrap">
 				<div id="icon-options-general" class="icon32"></div>
-				<h2><?php esc_html_e( 'Google Analytics ID', '%TEXTDOMAIN%' ); ?></h2>
+				<h2><?php esc_html_e( 'Google Analytics ID', 'wolf-analytics' ); ?></h2>
 				<?php if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ) { ?>
 				<div id="setting-error-settings_updated" class="updated settings-error">
-					<p><strong><?php esc_html_e( 'Settings saved.', '%TEXTDOMAIN%' ); ?></strong></p>
+					<p><strong><?php esc_html_e( 'Settings saved.', 'wolf-analytics' ); ?></strong></p>
 				</div>
 				<?php } ?>
 				<form action="options.php" method="post">
 					<?php settings_fields( 'wolf-analytics-options' ); ?>
 					<?php do_settings_sections( 'wolf-analytics-options' ); ?>
 					<p class="submit">
-						<input name="save" type="submit" class="button-primary" value="<?php esc_html_e( 'Save Changes', '%TEXTDOMAIN%' ); ?>">
+						<input name="save" type="submit" class="button-primary" value="<?php esc_html_e( 'Save Changes', 'wolf-analytics' ); ?>">
 					</p>
 				</form>
 			</div>
@@ -248,8 +241,8 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		 */
 		public function load_plugin_textdomain() {
 
-			$domain = '%TEXTDOMAIN%';
-			$locale = apply_filters( '%TEXTDOMAIN%', get_locale(), $domain );
+			$domain = 'wolf-analytics';
+			$locale = apply_filters( 'wolf-analytics', get_locale(), $domain );
 			load_textdomain( $domain, WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . $locale . '.mo' );
 			load_plugin_textdomain( $domain, FALSE, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		}
@@ -259,7 +252,7 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		 */
 		public function settings_action_links( $links ) {
 			$setting_link = array(
-				'<a href="' . admin_url( 'tools.php?page=wolf-analytics' ) . '">' . esc_html__( 'Settings', '%TEXTDOMAIN%' ) . '</a>',
+				'<a href="' . admin_url( 'tools.php?page=wolf-analytics' ) . '">' . esc_html__( 'Settings', 'wolf-analytics' ) . '</a>',
 			);
 			return array_merge( $links, $setting_link );
 		}

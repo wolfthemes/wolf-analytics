@@ -1,13 +1,13 @@
 {
-	"version": "1.0.3",
-	"updated": "2016-01-19",
+	"version": "1.0.5",
+	"updated": "2020-08-26",
 	"slug": "wolf-analytics",
 	"name": "Wolf Analytics",
 	"created": "2016-10-11",
 	"createdNice": "11th october 2016",
 	"description": "Output your Google Analytics tracking code to your visitor everywhere on your website.",
 	"link": "https://github.com/wolfthemes/wolf-analytics",
-	"shortlink": "http://wlfthm.es/a9alp1",
+	"shortlink": "http://wlfthm.es/wolf-analitycs",
 	"author": "WolfThemes",
 	"authorURI": "http://wolfthemes.com"
 }
