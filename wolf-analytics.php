@@ -16,22 +16,9 @@
  * @category Core
  * @author %AUTHOR%
  *
- * Being a free product, this plugin is distributed as-is without official support.
- * Verified customers however, who have purchased a premium theme
- * at http://themeforest.net/user/Wolf-Themes/portfolio?ref=Wolf-Themes
+ * Verified customers who have purchased a premium theme at https://wlfthm.es/tf/
  * will have access to support for this plugin in the forums
- * http://help.wolfthemes.com/
- *
- * Copyright (C) 2013 Constantin Saguin
- * This WordPress Plugin is a free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * It is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * See http://www.gnu.org/licenses/gpl-3.0.html
+ * https://wlfthm.es/help/
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -87,20 +74,6 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		}
 
 		/**
-		 * Cloning is forbidden.
-		 */
-		public function __clone() {
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', '%TEXTDOMAIN%' ), '1.0' );
-		}
-
-		/**
-		 * Unserializing instances of this class is forbidden.
-		 */
-		public function __wakeup() {
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', '%TEXTDOMAIN%' ), '1.0' );
-		}
-
-		/**
 		 * %NAME% Constructor.
 		 */
 		public function __construct() {
@@ -116,11 +89,11 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 
 			// output in our theme custom hook if exist
 			if ( function_exists( 'wolf_body_end' ) ) {
-				
+
 				add_action( 'wolf_body_end', array( $this, 'analytics_tracking_code' ) );
-			
+
 			} else {
-				
+
 				add_action( 'wp_footer', array( $this, 'analytics_tracking_code' ) );
 			}
 
@@ -241,8 +214,9 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		public function analytics_tracking_code() {
 
 			$google_id = esc_js( $this->get_option( 'google_id' ) );
+			$is_admin = current_user_can( 'manage_options' );
 
-			if ( $google_id ) {
+			if ( $google_id && ! $is_admin ) {
 				$tracking_code = "<script>
 				  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 				  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -254,9 +228,9 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 
 				</script>";
 
-				if ( 
+				if (
 					$tracking_code
-					&& ! is_user_logged_in() 
+					&& ! is_user_logged_in()
 				) {
 					echo $tracking_code;
 				}
@@ -288,16 +262,28 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		 * Plugin update
 		 */
 		public function plugin_update() {
-			
-			$plugin_data     = get_plugin_data( __FILE__ );
-			$current_version = $plugin_data['Version'];
-			$plugin_slug     = plugin_basename( dirname( __FILE__ ) );
-			$plugin_path     = plugin_basename( __FILE__ );
-			$remote_path     = $this->update_url . '/' . $plugin_slug;
 
-			include_once( 'class-wa-update.php' );
+			if ( ! class_exists( 'WP_GitHub_Updater' ) ) {
+				include_once 'updater.php';
+			}
 
-			new WLFNLTCS_Update( $current_version, $remote_path, $plugin_path );
+			$repo = 'wolfthemes/wolf-analytics';
+
+			$config = array(
+				'slug' => plugin_basename( __FILE__ ),
+				'proper_folder_name' => 'wolf-analytics',
+				'api_url' => 'https://api.github.com/repos/' . $repo . '',
+				'raw_url' => 'https://raw.github.com/' . $repo . '/master/',
+				'github_url' => 'https://github.com/' . $repo . '',
+				'zip_url' => 'https://github.com/' . $repo . '/archive/master.zip',
+				'sslverify' => true,
+				'requires' => '5.0',
+				'tested' => '5.5',
+				'readme' => 'README.md',
+				'access_token' => '',
+			);
+
+			new WP_GitHub_Updater( $config );
 		}
 	}
 } // endif class exists
