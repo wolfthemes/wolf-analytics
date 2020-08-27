@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Wolf Analytics
+ * Plugin Name: Google Analytics
  * Plugin URI: https://github.com/wolfthemes/wolf-analytics
  * Description: Output your Google Analytics tracking code to your visitor everywhere on your website.
- * Version: 1.0.5
+ * Version: 1.0.6
  * Author: WolfThemes
  * Author URI: http://wolfthemes.com
  * Requires at least: 5.0
@@ -30,7 +30,7 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 	 * Contains the main functions for Wolf_Analytics
 	 *
 	 * @class Wolf_Analytics
-	 * @version 1.0.5
+	 * @version 1.0.6
 	 * @since 1.0.0
 	 */
 	class Wolf_Analytics {
@@ -38,7 +38,7 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		/**
 		 * @var string
 		 */
-		public $version = '1.0.5';
+		public $version = '1.0.6';
 
 		/**
 		 * @var Wolf Analytics The single instance of the class

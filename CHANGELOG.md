@@ -1,7 +1,8 @@
 # Changelog
 
-#### 26th August 2020 - Version 1.0.5
+#### 26th August 2020 - Version 1.0.6
 
+-   Tweak: Unbrand plugin name
 -   Tweak: Move project to GutHub
 -   Fix: Fixed add_management_page error
 

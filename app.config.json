@@ -1,8 +1,8 @@
 {
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"updated": "2020-08-26",
 	"slug": "wolf-analytics",
-	"name": "Wolf Analytics",
+	"name": "Google Analytics",
 	"created": "2016-10-11",
 	"createdNice": "11th october 2016",
 	"description": "Output your Google Analytics tracking code to your visitor everywhere on your website.",

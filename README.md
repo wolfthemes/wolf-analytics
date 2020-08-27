@@ -1,4 +1,4 @@
-# Thanks for downloading Wolf Analytics!
+# Thanks for downloading Google Analytics!
 
 Output your Google Analytics tracking code to your visitor everywhere on your website.
 
