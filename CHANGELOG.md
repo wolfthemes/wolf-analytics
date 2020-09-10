@@ -1,5 +1,9 @@
 # Changelog
 
+#### 10th September 2020 - Version 1.0.7
+
+-   Tweak: Added wolf_analytics_api_key filter
+
 #### 26th August 2020 - Version 1.0.6
 
 -   Tweak: Unbrand plugin name

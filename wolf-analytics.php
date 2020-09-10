@@ -3,7 +3,7 @@
  * Plugin Name: Google Analytics
  * Plugin URI: https://github.com/wolfthemes/wolf-analytics
  * Description: Output your Google Analytics tracking code to your visitor everywhere on your website.
- * Version: 1.0.6
+ * Version: 1.0.7
  * Author: WolfThemes
  * Author URI: http://wolfthemes.com
  * Requires at least: 5.0
@@ -30,7 +30,7 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 	 * Contains the main functions for Wolf_Analytics
 	 *
 	 * @class Wolf_Analytics
-	 * @version 1.0.6
+	 * @version 1.0.7
 	 * @since 1.0.0
 	 */
 	class Wolf_Analytics {
@@ -38,7 +38,7 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		/**
 		 * @var string
 		 */
-		public $version = '1.0.6';
+		public $version = '1.0.7';
 
 		/**
 		 * @var Wolf Analytics The single instance of the class
@@ -212,11 +212,11 @@ if ( ! class_exists( 'Wolf_Analytics' ) ) {
 		 */
 		public function analytics_tracking_code() {
 
-			$google_id = esc_js( $this->get_option( 'google_id' ) );
+			$google_id = esc_js( apply_filters( 'wolf_analytics_api_key', $this->get_option( 'google_id' ) ) );
 			$is_admin = current_user_can( 'manage_options' );
 
 			if ( $google_id && ! $is_admin ) {
-				$tracking_code = "<script>
+				$tracking_code = "<!-- GA --><script>
 				  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 				  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 				  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
